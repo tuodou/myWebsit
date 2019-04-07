@@ -1,0 +1,57 @@
+footer {
+  background: #303030;
+  color: #999;
+  .footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    .footer-item {
+      flex: 1;
+      margin-right: 15px;
+      &:nth-last-child(1) {
+        margin-right: 0;
+      }
+      .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .header-text {
+          font-size: 20px;
+        }
+        .header-icon {
+          flex: 1;
+          height: 2px;
+          margin-left: 10px;
+          border: 1px dotted #999;
+        }
+      }
+      .item-content {
+        text-align: left;
+        p {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          cursor: pointer;
+          &::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            margin-right: 6px;
+            background: url('../../assets/images/arrow_right.png') center center no-repeat;
+            background-size: 16px 16px;
+          }
+        }
+      }
+    }
+  }
+  .footer-footer {
+    padding: 4px 0;
+    p {
+      margin: 0;
+      line-height: 28px;
+    }
+  }
+}

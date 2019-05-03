@@ -42,7 +42,7 @@ export default {
         typeName: '',
       },
       text: 'this is a default artical text.',
-      articalList: articalConfig.articalList
+      articalList: articalConfig.getArticalList()
     }
   },
   mounted () {

@@ -184,7 +184,7 @@ const getArticalList = (typeInfo) => {
   return new Promise((res, rej) => {
     let list = []
     list = articalList.filter(ele => {
-      ele.tag = typeInfo.typeName
+      ele.tag = (typeInfo && typeInfo.typeName) || articalSiderList[0].typeName
       return Math.random() > 0.7
     })
     res(list)

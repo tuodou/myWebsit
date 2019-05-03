@@ -3,7 +3,7 @@
     <div class="rotate-container">
       <div
         class="rotate-item"
-        v-for="(item, index) in text"
+        v-for="(item, index) in contentList"
         :key="index">{{item}}</div>
     </div>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: 'numberChar',
   data () {
     return {
-      text: getContent()
+      contentList: getContent()
     }
   }
 }

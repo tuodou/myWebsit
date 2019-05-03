@@ -5,6 +5,9 @@ Vue.use(Router)
 
 const Home = () => import('@/views/home')
 const Login = () => import('@/views/login')
+const artical = () => import('@/views/artical/index')
+
+import articalChilds from './artical'
 
 const router = new Router({
   mode: 'history',
@@ -26,6 +29,18 @@ const router = new Router({
       }
     },
     {
+      path: '/artical',
+      name: 'artical',
+      redirect: '/artical/articalList',
+      component: artical,
+      meta: {
+        title: 'artical'
+      },
+      children: [
+        ...articalChilds
+      ]
+    },
+    {
       path: '*',
       component: Home
     }
@@ -36,8 +51,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-router.afterEach((to, from, next) => {
-
-})
+router.afterEach((to, from, next) => {})
+console.log(router)
 
 export default router

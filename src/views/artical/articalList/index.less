@@ -1,0 +1,47 @@
+.artical-list {
+  width: 100%;
+  .list-container {
+    padding: 15px 0 15px 15px;
+    border-top: 1px solid #ddd;
+    .list-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 15px;
+      padding-bottom: 6px;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        border: none;
+      }
+      .artical-title {
+        text-decoration: underline;
+        font-size: 18px;
+      }
+      .artical-content {
+        font-size: 16px;
+        color: #333;
+      }
+      .artical-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        font-size: 10px;
+        color: #2d9bf2;
+      }
+      .artical-action {
+        position: absolute;
+        top: 0;
+        right: 0;
+        .edit-btn {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

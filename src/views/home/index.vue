@@ -44,13 +44,15 @@ import myFooter from '@/components/myFooter'
 
 import swiperImgList from '@/configs/swiperImgConfig'
 import numberChar from '@/components/numberChar'
+import slotTest from '@/components/slotTest'
 export default {
   name: "home",
   components: {
     swiper,
     numberChar,
     recommend,
-    myFooter
+    myFooter,
+    slotTest
   },
   data () {
     return {
@@ -59,7 +61,7 @@ export default {
   },
   methods: {
     onSearch (value) {
-      console.log(value)
+      this.showWait(value)
     },
     toHome () {
       this.$router.push('/home')
@@ -68,7 +70,7 @@ export default {
       this.showWait()
     },
     toBlog () {
-      this.showWait()
+      this.$router.push({ name: 'artical' })
     },
     toShortCodes () {
       this.showWait()
@@ -85,4 +87,18 @@ export default {
 
 <style lang="less" scoped>
 @import './index.less';
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    border-radius: 6px;
+    background: #fff;
+  }
+}
 </style>

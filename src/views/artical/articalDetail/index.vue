@@ -1,8 +1,8 @@
 <template>
   <div class="artical-detail">
     <div class="detail-action">
-      <a-button type="primary">back</a-button>
-      <a-button type="primary">edit</a-button>
+      <a-button type="primary" @click="back">back</a-button>
+      <a-button type="primary" @click="editArtical">edit</a-button>
     </div>
     <h2 class="artical-title">{{artical.title}}</h2>
     <div class="artical-content" v-html="artical.content"></div>
@@ -42,6 +42,14 @@ export default {
     }).catch(err => {
       console.log(err)
     })
+  },
+  methods: {
+    back () {
+      this.$router.back()
+    },
+    editArtical () {
+      this.$router.push({name: 'editArtical', query: {articalId: this.artical.articalId}})
+    }
   }
 }
 </script>

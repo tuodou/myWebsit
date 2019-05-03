@@ -10,7 +10,6 @@
       >
         <div class="artical-action">
           <a-button class="edit-btn" type="primary" @click="editArtical(item.articalId)">Edit</a-button>
-          <a-button type="danger" @click="deleteArtical(item.articalId)">Delete</a-button>
         </div>
         <p
           class="artical-title"
@@ -54,26 +53,17 @@ export default {
   methods: {
     updateCondition (e) {
       this.getArticalList()
-      console.log(e)
     },
     chooseArtical (artical) {
       this.$router.push({name: 'articalDetail', query: {articalId: artical.articalId}})
-      console.log(artical)
     },
     getArticalList () {
       articalConfig.getArticalList(this.typeInfo).then(res => {
-        console.log(res)
         this.articalList = res
       })
     },
     editArtical (articalId) {
       this.$router.push({name: 'editArtical', query: {articalId}})
-    },
-    deleteArtical (articalId) {
-      let confirmRes = confirm('确认删除吗')
-      if (confirmRes) {
-        alert('删除成功')
-      }
     }
   }
 }

@@ -190,9 +190,20 @@ const getArticalList = (typeInfo) => {
     res(list)
   })
 }
+const getObjectOptions = () => {
+  let result = []
+  articalSiderList.forEach(ele => {
+    result.push({
+      label: ele.typeName,
+      value: ele.typeId
+    })
+  })
+  return result
+}
 export default {
   articalSiderList,
   articalList,
   getArticalDetail,
-  getArticalList
+  getArticalList,
+  getObjectOptions
 }

@@ -23,6 +23,9 @@
         </div>
       </div>
     </div>
+    <div class="create-btn" @click="createArtical">
+      <img src="../../../assets/images/create_icon.png"/>
+    </div>
   </div>
 </template>
 
@@ -47,7 +50,6 @@ export default {
   mounted () {
     this.typeInfo.typeId = this.$route.query.typeId
     this.typeInfo.typeName = this.$route.query.typeName
-    console.log(this.$route.query)
     this.getArticalList()
   },
   methods: {
@@ -64,6 +66,9 @@ export default {
     },
     editArtical (articalId) {
       this.$router.push({name: 'editArtical', query: {articalId}})
+    },
+    createArtical () {
+      this.$router.push({name: 'addArtical', query: {}})
     }
   }
 }

@@ -52,6 +52,5 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from, next) => {})
-console.log(router)
 
 export default router

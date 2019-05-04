@@ -60,14 +60,12 @@ export default {
     },
     onObjectChange (e) {
       this.artical.typeId = e[0]
-      console.log(e)
     },
     back () {
       this.$router.back()
     },
     submitArtical () {
-      alert('提交成功')
-      console.log(this.artical)
+      this.$message.success('提交成功')
       this.back()
     }
   }

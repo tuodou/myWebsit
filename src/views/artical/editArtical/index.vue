@@ -71,8 +71,10 @@ export default {
       this.$router.back()
     },
     submitArtical () {
-      alert('修改成功')
-      this.backToList()
+      this.$message.success('修改成功')
+      setTimeout(() => {
+        this.backToList()
+      }, 1000)
     },
     backToTop () {
       window.scrollTo(0, 0)

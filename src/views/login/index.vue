@@ -1,7 +1,11 @@
 <template>
   <div class="login" :style="bgStyle">
     <div class="login-content">
-      <p class="content-header">login in or register</p>
+      <p class="content-header">sign in or sign up</p>
+      <div class="sign-action" @click="chooseSignAction">
+        <a-button class="action-item" :class="isLogin ? 'active' : ''">sign in</a-button>
+        <a-button class="action-item" :class="isLogin ? '' : 'active'">sign up</a-button>
+      </div>
       <div class="content-logo">
         <img class="logo-img" :src="logo" />
       </div>
@@ -15,9 +19,9 @@
           <input id="password" type="password" v-model.trim="loginInfo.password" placeholder="Please input your password" />
         </div>
         <div class="input-item">
-          <a-checkbox defaultChecked @change="rememberMe">remember me</a-checkbox>
+          <a-checkbox v-if="isLogin" defaultChecked @change="rememberMe">remember me</a-checkbox>
         </div>
-        <button class="login-btn" @click="loginIn">login in</button>
+        <button class="login-btn" @click="loginIn">{{isLogin ? 'Sign In' : 'Sign Up'}}</button>
       </div>
       <div class="copyright">版权所有 | 草帽海贼团</div>
     </div>
@@ -27,10 +31,12 @@
 <script>
 import bgConfig from '@/configs/backgroundConfig'
 import validata from '@/utils/validate'
+import API from '@/api/artical'
 export default {
   name: "login",
   data () {
     return {
+      isLogin: true,
       loginInfo: {
         username: '',
         password: '',
@@ -51,13 +57,23 @@ export default {
     loginIn () {
       if (!this.clickAble) return
       this.clickAble = false
+      setTimeout(() => {
+        this.clickAble = true
+      }, 2000)
       let testResult = validata.testLoginInfo(this.loginInfo)
       if (testResult === true) {
-        this.$router.push('/home')
-        this.clickAble = true
+        const inter = this.isLogin ? API.signIn : API.signUp
+        inter(this.loginInfo).then(res => {
+          console.log(res, '****************')
+          this.$router.push('/home')
+          this.clickAble = true
+        }).catch(err => {
+          this.$message.error(err.errorMessage, this.closeMsg)
+          console.log(err)
+        })
       } else {
         console.log(testResult)
-        this.$message.error(testResult,this.closeMsg)
+        this.$message.error(testResult, this.closeMsg)
       }
     },
     closeMsg () {
@@ -65,6 +81,9 @@ export default {
     },
     rememberMe (e) {
       this.loginInfo.remember = e.target.checked
+    },
+    chooseSignAction () {
+      this.isLogin = !this.isLogin
     }
   }
 }

@@ -2,11 +2,12 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosX = axios.create({
-  baseURL: 'localhost:8080',
+  baseURL: 'http://localhost:3000',
   timeout: 80000
 })
 axiosX.interceptors.response.use(function (response) {
   let res
+  console.log('--------', response)
   if (response && (Number(response.status) === 200 || Number(response.status) === 304)) {
     res = response.data
   }

@@ -49,6 +49,9 @@ export default {
     }
   },
   created () {
+    if (window.localStorage.getItem('userToken')) {
+      this.$router.push({name: 'home'})
+    }
     this.bgStyle = {
       backgroundImage: `url(${bgConfig.bgList[Math.floor(Math.random() * bgConfig.bgList.length)]})`
     }
@@ -64,15 +67,14 @@ export default {
       if (testResult === true) {
         const inter = this.isLogin ? API.signIn : API.signUp
         inter(this.loginInfo).then(res => {
-          console.log(res, '****************')
+          console.log('+++++++++++++++++', res)
+          window.localStorage.setItem('userToken', res.token)
           this.$router.push('/home')
           this.clickAble = true
         }).catch(err => {
           this.$message.error(err.errorMessage, this.closeMsg)
-          console.log(err)
         })
       } else {
-        console.log(testResult)
         this.$message.error(testResult, this.closeMsg)
       }
     },

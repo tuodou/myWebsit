@@ -2,12 +2,12 @@
   <div class="artical-sider">
     <div
       class="artical-type-item"
-      :class="item.typeId === activeType.typeId ? 'active-type' : ''"
+      :class="item.subjectId === activeType.subjectId ? 'active-type' : ''"
       v-for="(item, index) in list"
       :key="index"
       @click="chooseArticalType(index)"
       >
-      {{item.typeName}}
+      {{item.subjectName}}
     </div>
   </div>
 </template>

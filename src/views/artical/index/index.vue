@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import API from '@/api/artical'
 import articalHeader from '@/components/artical/articalHeader'
 import articalLeftSider from '@/components/artical/articalLeftSider'
 import articalFilter from '@/components/artical/articalFilter'
@@ -39,6 +40,14 @@ export default {
       leftSiderList: articalConfig.articalSiderList,
       articalList: articalConfig.articalList
     }
+  },
+  created () {
+    API.getSubjectList().then(res => {
+      console.log('get subject list', res.message)
+      this.leftSiderList = res.data
+    }).catch(err => {
+      console.log(err)
+    })
   },
   methods: {
     chooseArticalType (e) {

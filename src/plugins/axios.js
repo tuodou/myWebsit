@@ -7,13 +7,12 @@ const axiosX = axios.create({
 })
 axiosX.interceptors.response.use(function (response) {
   let res
-  console.log('--------', response)
   if (response && (Number(response.status) === 200 || Number(response.status) === 304)) {
     res = response.data
   }
   if (res) {
     if (res.success) {
-      return res.data
+      return res
     } else {
       return Promise.reject(res)
     }

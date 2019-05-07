@@ -8,6 +8,9 @@ export default {
   signUp (data) {
     return Post('/signUp', data)
   },
+  getSubjectList (data) {
+    return Post('/artical/getSubjectList')
+  },
   getArticalList (typeInfo) {
     return Post('/artical/getList', typeInfo)
   },

@@ -48,7 +48,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  next()
+  if (to.name !== 'login' && !window.localStorage.getItem('userToken')) {
+    next({
+      name: 'login'
+    })
+  } else {
+    next()
+  }
 })
 
 router.afterEach((to, from, next) => {})

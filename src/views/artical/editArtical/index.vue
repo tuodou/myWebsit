@@ -27,6 +27,8 @@
 <script>
 import qEditor from '@/components/qEditor'
 import articalConfig from '@/configs/articalConfig'
+
+import API from '@/api/artical'
 export default {
   name: "editArtical",
   components: {
@@ -52,8 +54,8 @@ export default {
   },
   methods: {
     getArtical () {
-      articalConfig.getArticalDetail(this.articalId).then(res => {
-        this.artical = res
+      API.getArticalDetail(this.articalId).then(res => {
+        this.artical = res.data
       }).catch(err => {
         console.log(err)
       })
@@ -71,10 +73,15 @@ export default {
       this.$router.back()
     },
     submitArtical () {
-      this.$message.success('修改成功')
-      setTimeout(() => {
-        this.backToList()
-      }, 1000)
+      console.log(this.artical)
+      API.updateArtical(this.artical).then(res => {
+        this.$message.success('修改成功')
+        setTimeout(() => {
+          this.backToList()
+        }, 1000)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     backToTop () {
       window.scrollTo(0, 0)

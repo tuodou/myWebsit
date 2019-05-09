@@ -12,16 +12,16 @@ export default {
     return Post('/artical/getSubjectList')
   },
   getArticalList (typeInfo) {
-    return Post('/artical/getList', typeInfo)
+    return Post('/artical/addArticalList', typeInfo)
   },
   getArticalDetail (articalId) {
-    return Post('/artical/detail', {articalId})
+    return Post('/artical/getArticalDetail', {articalId})
   },
   addArtical (artical) {
-    return Post('/artical/add', {artical})
+    return Post('/artical/addArtical', artical)
   },
   updateArtical (artical) {
-    return Post('/artical/update', {artical})
+    return Post('/artical/updateArtical', artical)
   },
   deleteArtical (articalId) {
     return Post('/artical/delete', {articalId})

@@ -15,7 +15,9 @@
       </div>
       <div class="base-info-item type">
         <label for="type">Object:</label>
-        <a-cascader class="base-info-input" id="type" :options="options" @change="onObjectChange" placeholder="Please select object" />
+        <a-select class="base-info-input" v-model="artical.subjectId">
+          <a-select-option v-for="item in options" :value="item.subjectId" :key="item.subjectId">{{item.subjectName}}</a-select-option>
+        </a-select>
       </div>
     </div>
     <q-editor
@@ -30,7 +32,9 @@
 
 <script>
 import qEditor from '@/components/qEditor'
-import articalConfig from '@/configs/articalConfig'
+
+import API from '@/api/artical'
+import { mapGetters } from 'vuex'
 export default {
   name: "editArtical",
   components: {
@@ -39,14 +43,33 @@ export default {
   data () {
     return {
       text: 'this is a default artical text for add.',
+      options: this.$store.state.artical.subjectList,
       artical: {
-        typeId: '',
+        subjectId: '',
         title: '',
         auth: '',
         content: ''
-      },
-      options: articalConfig.getObjectOptions()
+      }
     }
+  },
+  created () {
+    if (this.options.length > 0) {
+      this.artical.subjectId = this.$store.state.artical.currentSubject.subjectId
+    }
+  },
+  watch: {
+    'getSubjectList': function (newValue) {
+      this.options = newValue
+    },
+    'getCurrentSubject': function (newValue) {
+      this.artical.subjectId = newValue.subjectId
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getSubjectList: 'getSubjectList',
+      getCurrentSubject: 'getCurrentSubject'
+    })
   },
   methods: {
     editBlur (e) {
@@ -58,15 +81,16 @@ export default {
     editChange (e) {
       this.artical.content = e.content
     },
-    onObjectChange (e) {
-      this.artical.typeId = e[0]
-    },
     back () {
       this.$router.back()
     },
     submitArtical () {
-      this.$message.success('提交成功')
-      this.back()
+      API.addArtical(this.artical).then(res => {
+        this.$message.success('提交成功')
+        this.back()
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

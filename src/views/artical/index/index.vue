@@ -6,8 +6,7 @@
     <div class="artical-content-container">
       <div class="artical-sider">
         <artical-left-sider
-          :list="leftSiderList"
-          @chooseArticalType="chooseArticalType"/>
+          @chooseSubject="chooseSubject"/>
       </div>
       <div class="artical-content">
         <router-view :key="forceUpdate"/>
@@ -17,7 +16,6 @@
 </template>
 
 <script>
-import API from '@/api/artical'
 import articalHeader from '@/components/artical/articalHeader'
 import articalLeftSider from '@/components/artical/articalLeftSider'
 import articalFilter from '@/components/artical/articalFilter'
@@ -37,20 +35,12 @@ export default {
       user: {
         userName: 'jerry'
       },
-      leftSiderList: articalConfig.articalSiderList,
       articalList: articalConfig.articalList
     }
   },
-  created () {
-    API.getSubjectList().then(res => {
-      console.log('get subject list', res.message)
-      this.leftSiderList = res.data
-    }).catch(err => {
-      console.log(err)
-    })
-  },
   methods: {
-    chooseArticalType (e) {
+    chooseSubject (e) {
+      console.log(e)
       this.forceUpdate = new Date().getTime().toString()
       this.$router.replace({name: 'articalList', query: e})
     }

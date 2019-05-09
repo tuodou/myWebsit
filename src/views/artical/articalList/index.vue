@@ -32,6 +32,10 @@
 <script>
 import articalFilter from '@/components/artical/articalFilter'
 import articalConfig from '@/configs/articalConfig'
+
+import API from '@/api/artical'
+
+import { mapGetters } from 'vuex'
 export default {
   name: "editArtical",
   components: {
@@ -39,18 +43,24 @@ export default {
   },
   data () {
     return {
-      typeInfo: {
-        typeId: '',
-        typeName: '',
-      },
       text: 'this is a default artical text.',
       articalList: articalConfig.getArticalList()
     }
   },
   mounted () {
-    this.typeInfo.typeId = this.$route.query.typeId
-    this.typeInfo.typeName = this.$route.query.typeName
-    this.getArticalList()
+    if (this.getCurrentSubject.subjectId) {
+      this.getArticalList()
+    }
+  },
+  watch: {
+    'getCurrentSubject': function (newValue) {
+      this.getArticalList()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getCurrentSubject: 'getCurrentSubject'
+    })
   },
   methods: {
     updateCondition (e) {
@@ -60,8 +70,11 @@ export default {
       this.$router.push({name: 'articalDetail', query: {articalId: artical.articalId}})
     },
     getArticalList () {
-      articalConfig.getArticalList(this.typeInfo).then(res => {
-        this.articalList = res
+      let reqData = {subjectId: this.getCurrentSubject.subjectId}
+      API.getArticalList(reqData).then(res => {
+        this.articalList = res.data
+      }).catch(err => {
+        console.log(err)
       })
     },
     editArtical (articalId) {

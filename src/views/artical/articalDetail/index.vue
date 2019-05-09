@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import articalConfig from '@/configs/articalConfig'
+import API from '@/api/artical'
 export default {
   name: "index",
   data () {
@@ -35,17 +35,20 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     this.articalId = this.$route.query.articalId
-    articalConfig.getArticalDetail(this.articalId).then(res => {
-      this.artical = res
-    }).catch(err => {
-      console.log(err)
-    })
+    this.getArtical()
   },
   methods: {
     back () {
       this.$router.back()
+    },
+    getArtical () {
+      API.getArticalDetail(this.articalId).then(res => {
+        this.artical = res.data
+      }).catch(err => {
+        console.log(err)
+      })
     },
     editArtical () {
       this.$router.push({name: 'editArtical', query: {articalId: this.artical.articalId}})

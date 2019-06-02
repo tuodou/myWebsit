@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosX = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://39.97.118.178:3000',
   timeout: 80000
 })
 axiosX.interceptors.response.use(function (response) {

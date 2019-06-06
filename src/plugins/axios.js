@@ -2,8 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosX = axios.create({
-  baseURL: 'http://39.97.118.178:3000',
-  timeout: 80000
+  baseURL: 'http://39.97.118.178/api',
+  timeout: 3000
 })
 axiosX.interceptors.response.use(function (response) {
   let res

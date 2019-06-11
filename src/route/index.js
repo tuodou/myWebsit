@@ -10,7 +10,7 @@ const artical = () => import('@/views/artical/index')
 import articalChilds from './artical'
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/home',
